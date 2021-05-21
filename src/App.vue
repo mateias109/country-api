@@ -8,7 +8,13 @@
 				</div>
 				<div v-if="homePage" class="undernav">
 					<div class="searchbar">
-						<input v-model="search" class="search" type="text" placeholder="Search for a country..." />
+						<input
+							v-model="search"
+							v-on:input="updateSearchList"
+							class="search"
+							type="text"
+							placeholder="Search for a country..."
+						/>
 
 						<div class="filtering">
 							<div class="filter-dropdown" v-if="!search" @click="filterbtn = !filterbtn">
@@ -30,8 +36,8 @@
 					</div>
 					<div class="list" v-if="search && homePage">
 						<ul>
-							<li class="listmenu" v-for="lists in filteredcountrys" :key="lists.id">
-								<div @click="changePage(lists)" href="/"><img :src="lists.flag" />{{ lists.name }}</div>
+							<li class="listmenu" v-for="country in filteredCountries" :key="country.id">
+								<div @click="changePage(country)" href="/"><img :src="country.flag" />{{ country.name }}</div>
 							</li>
 						</ul>
 					</div>
@@ -93,7 +99,7 @@ export default {
 			homePage: true,
 			page: null,
 			liston: false,
-			margin: -0,
+			filteredCountries: null,
 		};
 	},
 
@@ -122,16 +128,12 @@ export default {
 			this.page = page;
 			console.log(this.page);
 		},
+		updateSearchList() {
+			return (this.filteredCountries = this.all.filter((list) => {
+				return list.name.toLowerCase().startsWith(this.search);
+			}));
+		},
 	},
-	// computed: {
-	// 	filteredcountrys() {
-	// 		if (this.search) {
-	// 			return (this.countrylist = this.all.filter((list) => {
-	// 				return list.name.toLowerCase().startsWith(this.search);
-	// 			}));
-	// 		}
-	// 	},
-	// },
 };
 </script>
 
@@ -163,18 +165,15 @@ nav {
 	justify-content: space-between;
 	align-items: center;
 	background-color: rgb(30, 81, 105);
-	height: 5rem;
+	padding: 2rem 3.5rem;
 }
 
 .where {
 	font-weight: bold;
 	font-size: 1rem;
-	margin-left: 7%;
 }
 .theme {
 	font-size: 1rem;
-
-	margin: 0% 7% 0% 0%;
 }
 .searchbar {
 	margin: 20px 2% 0;
@@ -191,16 +190,16 @@ nav {
 	background-color: rgba(52, 71, 83, 1);
 	width: 100%;
 	text-align: start;
-	border: 0.2rem rgba(255, 255, 255, 0) solid;
+	border: 1px rgba(255, 255, 255, 0) solid;
 	border-radius: 6px;
 	font-size: 0.7rem;
 	outline: none;
 	color: aliceblue;
-	padding: 10px 100px 10px 60px;
+	padding: 10px 15px;
 }
 
 .search:hover {
-	border: 4px white solid;
+	border: 1px white solid;
 }
 ::placeholder {
 	color: white;
@@ -346,8 +345,7 @@ nav {
 	line-height: 2;
 }
 .singlecountry img {
-	width: 100%;
-	height: 20vh;
+	width: 20rem;
 }
 .singlecountry h2 {
 	font-size: 3vh;
