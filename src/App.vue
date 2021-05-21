@@ -176,7 +176,7 @@ nav {
 	font-size: 1rem;
 }
 .searchbar {
-	margin: 20px 2% 0;
+	margin: 20px;
 	align-items: center;
 	display: flex;
 	flex-direction: row;
@@ -300,22 +300,23 @@ nav {
 	/* margin-left: 10%; */
 }
 .list {
-	/* position: fixed; */
-	/* top: 9.5rem; */
-	margin: -5% 0 0 0.5rem;
+	top: 11rem;
+	left: 0.5rem;
+	right: 0.5rem;
+	margin: 10px;
+	position: fixed;
 	background-color: rgb(71, 103, 122);
-	width: 96.2%;
-	height: 15rem;
+	max-height: 15rem;
 	overflow-y: auto;
 	border-radius: 5px;
-	/* margin-top: 18rem; */
+	padding: 0.5rem 1.5rem;
+	max-width: 26rem;
 }
 .listmenu {
 	width: 90%;
 	background: rgb(71, 103, 122);
-	margin: 1.5rem 0% 0% 10%;
+	margin: 1rem 0;
 	list-style-type: none;
-	/* padding: 0% 0% 4% 0%; */
 }
 .listmenu div {
 	color: aliceblue;
@@ -356,10 +357,6 @@ nav {
 @media only screen and (min-width: 1024px) {
 	.search {
 		width: 430px;
-	}
-	.list {
-		width: 610px;
-		margin: -0.4rem 0 0 4vh;
 	}
 }
 </style>
